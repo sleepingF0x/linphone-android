@@ -1121,6 +1121,7 @@ class CoreContext
         if (params == null) {
             Log.w("$TAG Answering call without params!")
             call.accept()
+            routeAnsweredCallToSpeaker(call)
             return
         }
 
@@ -1148,6 +1149,13 @@ class CoreContext
         }
 
         call.acceptWithParams(params)
+        routeAnsweredCallToSpeaker(call)
+    }
+
+    @WorkerThread
+    private fun routeAnsweredCallToSpeaker(call: Call) {
+        Log.i("$TAG Call was answered, routing audio to speaker")
+        AudioUtils.routeAudioToSpeaker(call)
     }
 
     @WorkerThread
