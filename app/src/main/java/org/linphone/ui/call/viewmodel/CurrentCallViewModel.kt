@@ -158,7 +158,7 @@ class CurrentCallViewModel
 
     val qualityIcon = MutableLiveData<Int>()
 
-    val hideSipAddresses = MutableLiveData<Boolean>()
+    val hideSipAddresses = MutableLiveData<Boolean>(false)
 
     var terminatedByUser = false
 
@@ -539,7 +539,6 @@ class CurrentCallViewModel
         refreshKeyguardLockedStatus()
 
         coreContext.postOnCoreThread { core ->
-            hideSipAddresses.postValue(corePreferences.hideSipAddresses)
             coreContext.contactsManager.addListener(contactsListener)
 
             core.addListener(coreListener)
@@ -1182,11 +1181,7 @@ class CurrentCallViewModel
         canBePaused.postValue(canCallBePaused())
 
         val address = call.callLog.remoteAddress
-        val uri = if (corePreferences.onlyDisplaySipUriUsername) {
-            address.username ?: ""
-        } else {
-            LinphoneUtils.getAddressAsCleanStringUriOnly(address)
-        }
+        val uri = address.username ?: LinphoneUtils.getAddressAsCleanStringUriOnly(address)
         displayedAddress.postValue(uri)
 
         val model = if (conferenceInfo != null) {

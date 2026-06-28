@@ -337,6 +337,9 @@ class CoreContext
             )
             when (currentState) {
                 Call.State.IncomingReceived -> {
+                    postOnMainThread {
+                        showCallActivity()
+                    }
                     if (corePreferences.autoAnswerEnabled) {
                         val autoAnswerDelay = corePreferences.autoAnswerDelay
                         if (autoAnswerDelay == 0) {
