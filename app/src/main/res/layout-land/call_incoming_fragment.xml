@@ -139,7 +139,7 @@
             android:text="@{viewModel.displayedAddress, default=`sip:johndoe@sip.linphone.org`}"
             android:textColor="@color/bc_white"
             android:textSize="14sp"
-            android:visibility="@{viewModel.isIncomingEarlyMedia ? View.VISIBLE : View.GONE, default=gone}"
+            android:visibility="@{viewModel.isIncomingEarlyMedia &amp;&amp; !viewModel.hideSipAddresses ? View.VISIBLE : View.GONE, default=gone}"
             app:layout_constraintBottom_toTopOf="@id/bottom_bar"
             app:layout_constraintStart_toStartOf="parent" />
 
