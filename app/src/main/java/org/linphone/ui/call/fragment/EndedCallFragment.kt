@@ -19,7 +19,6 @@
  */
 package org.linphone.ui.call.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -93,12 +92,7 @@ class EndedCallFragment : GenericCallFragment() {
                 }
 
                 withContext(Dispatchers.Main) {
-                    Log.i("$TAG Going to home screen and finishing activity")
-                    val homeIntent = Intent(Intent.ACTION_MAIN).apply {
-                        addCategory(Intent.CATEGORY_HOME)
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    }
-                    startActivity(homeIntent)
+                    Log.i("$TAG Finishing activity")
                     requireActivity().finish()
                 }
             }
